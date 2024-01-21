@@ -31,7 +31,7 @@ jobs:
         run: git clone --depth=1 ${{ github.event.inputs.repository }} workspace
 
       - name: Build APK
-        working-directory: ./workspace
+        working-directory: ./workspace/AndroidHelloWorld
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
