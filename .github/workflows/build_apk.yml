@@ -11,7 +11,7 @@ on:
       jdkVersion:
         description: "OpenJDK version to use: 8 / 11 / 17 etc."
         required: false
-        default: "17"
+        default: "8"
       taskName:
         description: "build.gradle task name: assemble[Flavor]Debug"
         required: false
@@ -31,7 +31,7 @@ jobs:
         run: git clone --depth=1 ${{ github.event.inputs.repository }} workspace
 
       - name: Build APK
-        working-directory: ./workspace/AndroidHelloWorld
+        working-directory: ./workspace
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
@@ -40,6 +40,6 @@ jobs:
       - name: Upload the APK artifact with 1 day retention
         uses: actions/upload-artifact@v3
         with:
-          path: ./**/*.apk
-          name: apk-archive
+          path: app/build/outputs/apk/debug/
+          name: apk-debug.apk
           retention-days: 1
