@@ -41,5 +41,5 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           path: workspace/app/build/outputs/apk/debug/
-          name: apk-debug.apk
+          name: apk-debug [${{ env.date_today }}].apk
           retention-days: 1
