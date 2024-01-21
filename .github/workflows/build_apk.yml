@@ -1,4 +1,5 @@
 # From https://github.com/ni554n/apk-builder-action
+# guide https://github.com/marketplace/actions/automated-build-android-app-with-github-action
 name: Build Android APK
 run-name: ${{ github.event.inputs.repository }}:${{ github.event.inputs.taskName }}
 
@@ -21,6 +22,11 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest # Android SDK is built-in in this image
+    
+      # Set Current Date As Env Variable
+      - name: Set Current DATE
+        run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
+        
     steps:
       - name: Setup JDK
         uses: actions/setup-java@v3
