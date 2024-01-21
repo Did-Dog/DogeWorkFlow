@@ -48,6 +48,6 @@ jobs:
       - name: Upload the APK artifact with 1 day retention
         uses: actions/upload-artifact@v3
         with:
-          path: workspace/app/build/outputs/apk/debug/
+          path: workspace/app/build/outputs/apk/debug/app-debug.apk
           name: apk-debug [${{ env.date_today }}].apk
           retention-days: 1
