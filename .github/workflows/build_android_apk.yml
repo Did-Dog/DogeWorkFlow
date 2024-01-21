@@ -21,6 +21,10 @@ on:
         description: "build.gradle task name: assemble[Flavor]Debug"
         required: false
         default: "assembleDebug"
+      appDirectory:
+        description: "Default directory where build.gradle located [/your directory]"
+        required: false
+        default: ""
 
 jobs:
   build:
@@ -42,7 +46,7 @@ jobs:
         run: git clone --depth=1 ${{ github.event.inputs.repository }} ${{ env.main_project_module }}
 
       - name: Build APK
-        working-directory: ./${{ env.main_project_module }}
+        working-directory: ./${{ env.main_project_module }}${{ github.event.inputs.appDirectory }}
         run: |
           if [ ! -f "gradlew" ]; then gradle wrapper; fi
           chmod +x gradlew
@@ -51,6 +55,6 @@ jobs:
       - name: Upload the APK artifact with 1 day retention
         uses: actions/upload-artifact@v3
         with:
-          path: ${{ env.main_project_module }}/app/build/outputs/apk/debug/
+          path: ${{ env.main_project_module }}${{ github.event.inputs.appDirectory }}/app/build/outputs/apk/debug/
           name: apk-debug [${{ env.date_today }}]
           retention-days: 1
