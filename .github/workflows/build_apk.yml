@@ -22,12 +22,13 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest # Android SDK is built-in in this image
-    
+        
+    steps:
+
       # Set Current Date As Env Variable
       - name: Set Current DATE
         run: echo "date_today=$(date +'%Y-%m-%d')" >> $GITHUB_ENV
         
-    steps:
       - name: Setup JDK
         uses: actions/setup-java@v3
         with:
