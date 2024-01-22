@@ -1,5 +1,6 @@
-name: SSH RDP
-run-name: SSH RDP
+# https://github.com/rdp-studio/ssh2actions
+name: SSH Remote RDP
+run-name: SSH Remote RDP
 env:
   # The name of the main module repository
   main_project_module: workspace
