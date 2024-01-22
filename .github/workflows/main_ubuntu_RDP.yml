@@ -14,6 +14,13 @@ jobs:
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
     - name: Extract
       run: unzip ngrok.zip
+    - name: Adding Architecture
+      run: |
+       sudo apt update
+       sudo apt install -y qemu-user-static binfmt-support
+       sudo dpkg --add-architecture amd64
+       sudo apt update
+       sudo apt install libc6:amd64
     - name: Make Ngrok Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
     - name: Auth
