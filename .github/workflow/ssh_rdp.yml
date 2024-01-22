@@ -1,0 +1,8 @@
+name: Build Android APK
+run-name: ${{ github.event.inputs.repository }}:${{ github.event.inputs.taskName }}
+env:
+  # The name of the main module repository
+  main_project_module: workspace
+  
+on:
+  workflow_dispatch:
