@@ -15,7 +15,7 @@ jobs:
     - name: Extract
       run: unzip ngrok.zip
     - name: Auth
-      run: ./ngrok authtoken $Env:NGROK_AUTH_TOKEN
+      run: ./ngrok/ngrok authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 
