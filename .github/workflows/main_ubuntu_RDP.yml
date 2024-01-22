@@ -14,6 +14,11 @@ jobs:
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
     - name: Extract
       run: unzip ngrok.zip
+    - name: Install
+      run: |
+       sudo apt install snapd
+       sudo apt install openssh-server
+       sudo systemctl status ssh
     - name: Adding Architecture
       run: |
        sudo apt update
