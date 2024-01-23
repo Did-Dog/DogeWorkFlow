@@ -28,8 +28,6 @@ jobs:
        sudo apt install libc6:amd64
     - name: Config RDP in Ubuntu
       run: |
-       sudo passwd
-       root
        sudo apt-get install xrdp
        sudo systemctl status xrdp
        sudo apt-get install xfce4
