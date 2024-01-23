@@ -38,9 +38,8 @@ jobs:
        sudo /etc/init.d/xrdp restart
     - name: Config Of XRDP vim
       run: |
-       sudo apt install vim -y
-       vim --version
-       sudo vim /etc/xrdp/xrdp.ini
+       sudo apt install nano -y
+       sudo nano /etc/xrdp/xrdp.ini
     - name: Make Ngrok Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
     - name: Auth
