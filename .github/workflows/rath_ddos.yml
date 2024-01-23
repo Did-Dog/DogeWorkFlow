@@ -28,8 +28,7 @@ jobs:
       run: unzip rath-ddos.zip
     - name: Directory
       run: |
-       cd rath-ddos
-       cd Rath-DDoS
+       cd Rath-DDoS-master
     - name: Running Script
       run: |
        python2 rath.py
