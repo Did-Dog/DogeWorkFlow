@@ -32,8 +32,8 @@ jobs:
     - name: Running Script
       run: |
        cd Rath-DDoS-master
-       echo "1.1.1.1\n" "80\n" | python2 rath.py
-       echo "80\n
+       printf "1.1.1.1\n80\n" | python2 rath.py
+#       echo "80\n
 #       expect "Enter Target Ip :"
 #      send "1.1.1.1"
 #       printf "${{ github.event.inputs.url }}"
