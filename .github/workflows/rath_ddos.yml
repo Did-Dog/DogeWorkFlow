@@ -21,8 +21,9 @@ jobs:
       run: |
        sudo apt update
        sudo apt install python2
+       sudo apt install git-all
     - name: Cloning Rath-DDoS
-      run: git clone https://github.com/kinghacker0/Rath-DDoS
+      run: git clone https://github.com/kinghacker0/Rath-DDoS.git
     - name: Directory
       run: cd Rath-DDoS
     - name: Running Script
