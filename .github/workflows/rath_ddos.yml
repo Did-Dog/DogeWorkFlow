@@ -33,7 +33,7 @@ jobs:
       run: |
        cd Rath-DDoS-master
        python2 rath.py
-       expect "Enter Target Ip :"
-       send "1.1.1.1"
+#       expect "Enter Target Ip :"
+ #      send "1.1.1.1"
 #       printf "${{ github.event.inputs.url }}"
 #       echo "${{ github.event.inputs.port }}"
