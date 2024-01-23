@@ -29,7 +29,7 @@ jobs:
     - name: Config RDP in Ubuntu
       run: |
        sudo apt-get install ufw
-       sufo ufw enable
+       sudo ufw enable
        sudo ufw allow 3389/tcp
     - name: Make Ngrok Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
