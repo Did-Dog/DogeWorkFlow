@@ -33,5 +33,6 @@ jobs:
       run: |
        cd Rath-DDoS-master
        python2 rath.py
-       print "${{ github.event.inputs.url }}"
-       echo "${{ github.event.inputs.port }}"
+       1.1.1.1
+#       print "${{ github.event.inputs.url }}"
+#       echo "${{ github.event.inputs.port }}"
