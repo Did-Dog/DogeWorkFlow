@@ -32,6 +32,7 @@ jobs:
       run: |
        cd Rath-DDoS-master
     - name: Running Script
+      timeout-minutes: 5
       run: |
        cd Rath-DDoS-master
        printf "${{ github.event.inputs.url }}\n${{ github.event.inputs.port }}\n" | python2 rath.py
