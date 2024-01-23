@@ -7,7 +7,7 @@ on:
       url:
         description: "Website Url"
         required: true
-        default: "https://google.com"
+        default: "1.1.1.1"
       port:
         description: "Port of target Website"
         required: true
