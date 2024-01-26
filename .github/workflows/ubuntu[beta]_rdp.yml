@@ -53,9 +53,9 @@ jobs:
         sudo apt install ubuntu-gnome-desktop
         sudo apt install gnome-session-flashback
         sudo apt install gnome-panel
-        sudo apt install gnome-tweak-tool
         sudo apt install xfce4
-        sudo apt install xfce4-goodies sudo apt-get autoremove -y
+        sudo apt install xfce4-goodies
+        sudo apt-get autoremove -y
 
     - name: Auth
       run: |
