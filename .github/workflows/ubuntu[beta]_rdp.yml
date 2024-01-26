@@ -42,7 +42,6 @@ jobs:
         sudo apt install xorg
         sudo apt install xrdp
         sudo apt install xorgxrdp
-        sudo apt install xorg-video-abi-23
         sudo apt install xserver-xorg-core
         sudo apt install xserver-xorg-input-all
         sudo apt install xfonts-base
