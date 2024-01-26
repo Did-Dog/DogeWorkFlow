@@ -19,10 +19,11 @@ jobs:
       run: |
         user=your_selected_account_name #https://gist.github.com/theriverman/fcbe99ac6cb51d3c4ab49492663b86f0
         password=your_supersecret_password
-        sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
+        sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user sudo
         # set password
         echo "$user:$password" | sudo chpasswd
         echo User: $user has been created with password: $password
+        sudo usermod -aG sudo $password
         #SCRIPT END
     - name: Install Unzipper
       run: sudo apt-get install unzip -y
