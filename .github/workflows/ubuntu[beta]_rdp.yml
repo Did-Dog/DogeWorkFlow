@@ -30,6 +30,13 @@ jobs:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
     - name: Install Libraries
       run: |
+        sudo su #clean
+        apt-get clean
+        cd /var/lib/apt
+        mv lists lists.old
+        mkdir -p lists/partial
+        apt-get clean
+        apt-get update #clean
         sudo apt install snapd
         sudo apt install openssh-server
         sudo systemctl status ssh
