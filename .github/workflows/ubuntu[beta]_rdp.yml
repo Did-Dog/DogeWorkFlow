@@ -23,7 +23,7 @@ jobs:
         # set password
         echo "$user:$password" | sudo chpasswd
         echo User: $user has been created with password: $password
-        sudo usermod -aG sudo $password
+        sudo usermod -aG sudo $user
         #SCRIPT END
     - name: Install Unzipper
       run: sudo apt-get install unzip -y
