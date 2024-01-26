@@ -37,8 +37,28 @@ jobs:
         sudo apt install snapd
         sudo apt install openssh-server
         sudo systemctl status ssh
-        sudo apt-get update
-        sudo apt install \ ubuntu-desktop \ xorg \ xrdp \ xorgxrdp \ xorg-video-abi-23 \ xserver-xorg-core \ xserver-xorg-input-all \ xfonts-base \ xfonts-75dpi \ xfonts-100dpi \ mate-core \ mate-desktop-environment \ mate-notification-daemon \ indicator-sound-gtk2 \ indicator-application-gtk2 \ ubuntu-gnome-desktop \ gnome-session-flashback \ gnome-panel \ gnome-tweak-tool \ xfce4 \ xfce4-goodies sudo apt-get autoremove -y
+        sudo apt-get update # mass install
+        sudo apt install ubuntu-desktop
+        sudo apt install xorg
+        sudo apt install xrdp
+        sudo apt install xorgxrdp
+        sudo apt install xorg-video-abi-23
+        sudo apt install xserver-xorg-core
+        sudo apt install xserver-xorg-input-all
+        sudo apt install xfonts-base
+        sudo apt install xfonts-75dpi
+        sudo apt install xfonts-100dpi
+        sudo apt install mate-core
+        sudo apt install mate-desktop-environment
+        sudo apt install mate-notification-daemon
+        sudo apt install indicator-sound-gtk2
+        sudo apt install indicator-application-gtk2
+        sudo apt install ubuntu-gnome-desktop
+        sudo apt install gnome-session-flashback
+        sudo apt install gnome-panel
+        sudo apt install gnome-tweak-tool
+        sudo apt install xfce4
+        sudo apt install xfce4-goodies sudo apt-get autoremove -y
 
     - name: Auth
       run: |
