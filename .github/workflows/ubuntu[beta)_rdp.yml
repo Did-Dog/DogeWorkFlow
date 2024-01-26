@@ -20,6 +20,7 @@ jobs:
        sudo apt install openssh-server
        sudo systemctl status ssh
        sudo apt-get install -y tightvncserver xrdp
+       sudo apt-get install -y xfce4 tightvncserver xrdp
     - name: Adding Architecture amd64
       run: |
        sudo apt update
@@ -32,8 +33,8 @@ jobs:
        sudo apt-get install xrdp
        sudo systemctl status xrdp
        sudo adduser xrdp ssl-cert
-       sudo ufw allow 3389/tcp
-       sudo /etc/init.d/xrdp restart
+#       sudo ufw allow 3389/tcp
+#       sudo /etc/init.d/xrdp restart
 #       sudo apt-get install xfce4
 #       sudo apt-get install xfce4-terminal
 #       sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
@@ -81,6 +82,13 @@ jobs:
         mkdir -p ~/.config
         vncserver
 #        sudo /etc/init.d/xrdp restart
+    - name: TUT5
+      run: |
+        cat > ~/.vnc/xstartup <<EOF
+        #!/bin/sh 
+        startxfce4 &
+        EOF
+        chmod +x ~/.vnc/xstartup
     - name: Config Of XRDP vim
       run: |
        sudo apt install nano -y
