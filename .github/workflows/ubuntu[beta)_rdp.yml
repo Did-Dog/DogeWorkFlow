@@ -1,4 +1,4 @@
-name: CI [Ubuntu] [beta]
+name: CI [Ubuntu]
 
 on: [workflow_dispatch]
 
@@ -10,90 +10,93 @@ jobs:
     steps:
     - name: Install Unzipper
       run: sudo apt-get install unzip -y
-    - name: Download
+    - name: Ngrok Downloading(Linux)
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
-    - name: Extract
+    - name: Ngrok Extracting(Linux)
       run: unzip ngrok.zip
-    - name: Install Libraries
-      run: |
-       sudo apt install snapd
-       sudo apt install openssh-server
-       sudo systemctl status ssh
-       sudo apt-get install -y tightvncserver xrdp
-       sudo apt-get install -y xfce4 tightvncserver xrdp
-    - name: Adding Architecture amd64
-      run: |
-       sudo apt update
-       sudo apt install -y qemu-user-static binfmt-support
-       sudo dpkg --add-architecture amd64
-       sudo apt update
-       sudo apt install libc6:amd64
-    - name: Config RDP in Ubuntu(XRDP)
-      run: |
-       sudo ufw allow 5901/tcp
-       sudo ufw allow 3389/tcp
-       sudo systemctl status xrdp
-    - name: TUT1
-      run: |
-       mkdir -p ~/.vnc
-       echo password | vncpasswd -f > ~/.vnc/passwd
-       chmod 600 ~/.vnc/passwd
-    - name: Tut2
-      run: |
-        cat > ~/.vnc/xstartup <<EOF
-        #!/bin/sh
-        def
-        export XKL_XMODMAP_DISABLE=1
-        unset SESSION_MANAGER
-        unset DBUS_SESSION_BUS_ADDRESS
-
-        gnome-panel &
-        gnome-settings-daemon &
-        metacity &
-        nautilus &
-        gnome-terminal &
-        EOF
-        chmod +x ~/.vnc/xstartup
-    - name: TUT 3
-      run: |
-        sudo bash -c 'cat > /etc/xrdp/xrdp.ini <<EOF
-        [globals]
-        bitmap_cache=yes
-        bitmap_compression=yes
-        port=3389
-        crypt_level=low
-        channel_code=1
-        [vnc1]
-        name=vncserver
-        lib=libvnc.so
-        ip=localhost
-        port=5901
-        username=
-        password=password
-        EOF'
-    - name: TUT4
-      run: |
-        touch ~/.Xauthority 
-        mkdir -p ~/.config
-        vncserver
-#    - name: TUT5
-#      run: |
-#        cat > ~/.vnc/xstartup <<EOF
-#        #!/bin/sh 
-#        startxfce4 &
-#        EOF
-#        chmod +x ~/.vnc/xstartup
-    - name: Config Of XRDP vim
-      run: |
-       sudo apt install nano -y
-       echo `cat /etc/xrdp/xrdp.ini`
-    - name: Make Ngrok Executable
+    - name: Ngrok Make Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
-    - name: Auth
+    - name: Ngrok Auth
       run: ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
 #      run: ngrok config add-authtoken $Env:NGROK_AUTH_TOKEN
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+    - name: Install Libraries
+      run: |
+        sudo apt install snapd
+        sudo apt install openssh-server
+        sudo systemctl status ssh
+        sudo apt-get update
+        sudo apt-get install -y \
+	    ubuntu-desktop \
+    	xorg \
+	    xrdp \
+	    xorgxrdp \
+    	xorg-video-abi-23 \
+    	xserver-xorg-core \
+		xserver-xorg-input-all \
+		xfonts-base \
+		xfonts-75dpi \
+		xfonts-100dpi \
+		mate-core \
+		mate-desktop-environment \
+		mate-notification-daemon \
+		indicator-sound-gtk2 \
+		indicator-application-gtk2 \
+		ubuntu-gnome-desktop \
+		gnome-session-flashback \
+		gnome-panel \
+		gnome-tweak-tool \
+		xfce4 \
+		xfce4-goodies
+		sudo apt-get autoremove -y
+    - name: Adding Architecture amd64
+      run: |
+        sudo apt update
+        sudo apt install -y qemu-user-static binfmt-support
+        sudo dpkg --add-architecture amd64
+        sudo apt update
+        sudo apt install libc6:amd64
+    - name: Auth
+      run |
+        sudo bash -c 'cat > /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf' << EOF
+        polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.color-manager.create-device" ||
+        action.id == "org.freedesktop.color-manager.create-profile" ||
+        action.id == "org.freedesktop.color-manager.delete-device" ||
+        action.id == "org.freedesktop.color-manager.delete-profile" ||
+        action.id == "org.freedesktop.color-manager.modify-device" ||
+        action.id == "org.freedesktop.color-manager.modify-profile") &&
+        subject.isInGroup("{users}")) {
+        return polkit.Result.YES;
+        }
+        });
+        EOF
+    - name: Config RDP in Ubuntu(XRDP)
+      run: |
+       sudo ufw allow 3389/tcp #setting tcp port
+       if [ -f /home/${USER}/.xsession ]; then #session manager
+           rm -f /home/${USER}/.xsession
+       fi
+       cat << 'EOF' >> /home/${USER}/.xsession
+       export LOGNAME=$USER
+       export LIBGL_ALWAYS_INDIRECT=1
+       unset SESSION_MANAGER
+       unset DBUS_SESSION_BUS_ADDRESS
+       mate-session
+       EOF
+       chmod +x /home/${USER}/.xsession #session manager
+    - name: Run Bash
+      run: sudo sed -i "s|#\!/bin/sh|#\!/bin/bash|g" /etc/X11/Xsession
+    - name: Starting XRDP
+      run: |
+        sudo adduser xrdp ssl-cert
+        sudo service xrdp restart
+        sudo service xrdp status
+    - name: Config Of XRDP vim
+      run: |
+        sudo apt install nano -y
+        echo `cat /etc/xrdp/xrdp.ini`
 
     - name: Create Tunnel
-      run: ngrok tcp 5901
+      run: ngrok tcp 3389
