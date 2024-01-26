@@ -8,6 +8,13 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    - name: Adding Architecture amd64
+      run: |
+        sudo apt update
+        sudo apt install -y qemu-user-static binfmt-support
+        sudo dpkg --add-architecture amd64
+        sudo apt update
+        sudo apt install libc6:amd64
     - name: Install Unzipper
       run: sudo apt-get install unzip -y
     - name: Ngrok Downloading(Linux)
@@ -28,13 +35,7 @@ jobs:
         sudo systemctl status ssh
         sudo apt-get update
         sudo apt-get install -y \ ubuntu-desktop \ xorg \ xrdp \ xorgxrdp \ xorg-video-abi-23 \ xserver-xorg-core \ xserver-xorg-input-all \ xfonts-base \ xfonts-75dpi \ xfonts-100dpi \ mate-core \ mate-desktop-environment \ mate-notification-daemon \ indicator-sound-gtk2 \ indicator-application-gtk2 \ ubuntu-gnome-desktop \ gnome-session-flashback \ gnome-panel \ gnome-tweak-tool \ xfce4 \ xfce4-goodies sudo apt-get autoremove -y
-    - name: Adding Architecture amd64
-      run: |
-        sudo apt update
-        sudo apt install -y qemu-user-static binfmt-support
-        sudo dpkg --add-architecture amd64
-        sudo apt update
-        sudo apt install libc6:amd64
+
     - name: Auth
       run: |
         sudo bash -c 'cat > /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf' << EOF
