@@ -17,7 +17,7 @@ jobs:
         sudo apt install libc6:amd64
     - name: Creating New User
       run: |
-        user=your_selected_account_name #https://gist.github.com/theriverman/fcbe99ac6cb51d3c4ab49492663b86f0
+        user=your_selected_account_name
         password=your_supersecret_password
         sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user sudo
         # set password
