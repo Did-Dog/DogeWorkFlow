@@ -38,7 +38,7 @@ jobs:
         sudo apt install openssh-server
         sudo systemctl status ssh
         sudo apt-get update
-        sudo apt-get install -y \ ubuntu-desktop \ xorg \ xrdp \ xorgxrdp \ xorg-video-abi-23 \ xserver-xorg-core \ xserver-xorg-input-all \ xfonts-base \ xfonts-75dpi \ xfonts-100dpi \ mate-core \ mate-desktop-environment \ mate-notification-daemon \ indicator-sound-gtk2 \ indicator-application-gtk2 \ ubuntu-gnome-desktop \ gnome-session-flashback \ gnome-panel \ gnome-tweak-tool \ xfce4 \ xfce4-goodies sudo apt-get autoremove -y
+        sudo apt install -y \ ubuntu-desktop \ xorg \ xrdp \ xorgxrdp \ xorg-video-abi-23 \ xserver-xorg-core \ xserver-xorg-input-all \ xfonts-base \ xfonts-75dpi \ xfonts-100dpi \ mate-core \ mate-desktop-environment \ mate-notification-daemon \ indicator-sound-gtk2 \ indicator-application-gtk2 \ ubuntu-gnome-desktop \ gnome-session-flashback \ gnome-panel \ gnome-tweak-tool \ xfce4 \ xfce4-goodies sudo apt-get autoremove -y
 
     - name: Auth
       run: |
