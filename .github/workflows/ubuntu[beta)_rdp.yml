@@ -80,7 +80,7 @@ jobs:
         touch ~/.Xauthority 
         mkdir -p ~/.config
         vncserver
-        sudo /etc/init.d/xrdp restart
+#        sudo /etc/init.d/xrdp restart
     - name: Config Of XRDP vim
       run: |
        sudo apt install nano -y
