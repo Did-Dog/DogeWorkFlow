@@ -1,0 +1,97 @@
+name: CI [Ubuntu] [beta]
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Install Unzipper
+      run: sudo apt-get install unzip -y
+    - name: Download
+      run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+    - name: Extract
+      run: unzip ngrok.zip
+    - name: Install Libraries
+      run: |
+       sudo apt install snapd
+       sudo apt install openssh-server
+       sudo systemctl status ssh
+       sudo apt-get install -y ubuntu-desktop gnome-session-fallback tightvncserver xrdp
+    - name: Adding Architecture amd64
+      run: |
+       sudo apt update
+       sudo apt install -y qemu-user-static binfmt-support
+       sudo dpkg --add-architecture amd64
+       sudo apt update
+       sudo apt install libc6:amd64
+    - name: Config RDP in Ubuntu(XRDP)
+      run: |
+       sudo apt-get install xrdp
+       sudo systemctl status xrdp
+       sudo adduser xrdp ssl-cert
+       sudo ufw allow 3389/tcp
+       sudo /etc/init.d/xrdp restart
+#       sudo apt-get install xfce4
+#       sudo apt-get install xfce4-terminal
+#       sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
+    - name: TUT1
+      run: |
+       mkdir -p ~/.vnc
+       echo password | vncpasswd -f > ~/.vnc/passwd
+       chmod 600 ~/.vnc/passwd
+    - name: Tut2
+      run: |
+        cat > ~/.vnc/xstartup <<EOF
+        #!/bin/sh
+        def
+        export XKL_XMODMAP_DISABLE=1
+        unset SESSION_MANAGER
+        unset DBUS_SESSION_BUS_ADDRESS
+
+        gnome-panel &
+        gnome-settings-daemon &
+        metacity &
+        nautilus &
+        gnome-terminal &
+        EOF
+        chmod +x ~/.vnc/xstartup
+    - name: TUT 3
+      run: |
+        sudo bash -c 'cat > /etc/xrdp/xrdp.ini <<EOF
+        [globals]
+        bitmap_cache=yes
+        bitmap_compression=yes
+        port=3389
+        crypt_level=low
+        channel_code=1
+        [vnc1]
+        name=vncserver
+        lib=libvnc.so
+        ip=localhost
+        port=5901
+        username=
+        password=password
+        EOF'
+    - name: TUT4
+      run: |
+        touch ~/.Xauthority 
+        mkdir -p ~/.config
+        vncserver
+        sudo /etc/init.d/xrdp restart
+    - name: Config Of XRDP vim
+      run: |
+       sudo apt install nano -y
+       echo `cat /etc/xrdp/xrdp.ini`
+    - name: Make Ngrok Executable
+      run: sudo cp ./ngrok /usr/bin/ngrok
+    - name: Auth
+      run: ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
+#      run: ngrok config add-authtoken $Env:NGROK_AUTH_TOKEN
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
+
+    - name: Create Tunnel
+      run: ngrok tcp 3389
