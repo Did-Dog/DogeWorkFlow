@@ -19,7 +19,7 @@ jobs:
       run: |
         user=your_selected_account_name
         password=your_supersecret_password
-        sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user sudo
+        sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
         # set password
         echo "$user:$password" | sudo chpasswd
         echo User: $user has been created with password: $password
