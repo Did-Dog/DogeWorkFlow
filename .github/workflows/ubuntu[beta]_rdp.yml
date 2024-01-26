@@ -19,7 +19,7 @@ jobs:
         password=your_supersecret_password
         sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
         # set password
-        echo "$user:$password" | chpasswd
+        echo "$user:$password" | sudo chpasswd
         echo User: $user has been created with password: $password
         #SCRIPT END
     - name: Install Unzipper
