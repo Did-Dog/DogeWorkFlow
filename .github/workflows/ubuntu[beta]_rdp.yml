@@ -50,7 +50,6 @@ jobs:
         sudo apt install mate-core
         sudo apt install mate-desktop-environment
         sudo apt install mate-notification-daemon
-        sudo apt install indicator-application-gtk2
         sudo apt install ubuntu-gnome-desktop
         sudo apt install gnome-session-flashback
         sudo apt install gnome-panel
