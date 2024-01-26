@@ -30,18 +30,11 @@ jobs:
        sudo apt install libc6:amd64
     - name: Config RDP in Ubuntu(XRDP)
       run: |
-       sudo apt-get install xrdp
-       sudo systemctl status xrdp
-       sudo adduser xrdp ssl-cert
-#       sudo ufw allow 3389/tcp
-#       sudo /etc/init.d/xrdp restart
-#       sudo apt-get install xfce4
-#       sudo apt-get install xfce4-terminal
-#       sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
-    - name: TUT1
-      run: |
        sudo ufw allow 5901/tcp
        sudo ufw allow 3389/tcp
+       sudo systemctl status xrdp
+    - name: TUT1
+      run: |
        mkdir -p ~/.vnc
        echo password | vncpasswd -f > ~/.vnc/passwd
        chmod 600 ~/.vnc/passwd
@@ -83,14 +76,13 @@ jobs:
         touch ~/.Xauthority 
         mkdir -p ~/.config
         vncserver
-#        sudo /etc/init.d/xrdp restart
-    - name: TUT5
-      run: |
-        cat > ~/.vnc/xstartup <<EOF
-        #!/bin/sh 
-        startxfce4 &
-        EOF
-        chmod +x ~/.vnc/xstartup
+#    - name: TUT5
+#      run: |
+#        cat > ~/.vnc/xstartup <<EOF
+#        #!/bin/sh 
+#        startxfce4 &
+#        EOF
+#        chmod +x ~/.vnc/xstartup
     - name: Config Of XRDP vim
       run: |
        sudo apt install nano -y
