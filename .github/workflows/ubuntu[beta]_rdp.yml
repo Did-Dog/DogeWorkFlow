@@ -14,7 +14,14 @@ jobs:
         sudo apt install -y qemu-user-static binfmt-support
         sudo dpkg --add-architecture amd64
         sudo apt update
-        sudo apt install libc6:amd64
+        sudo apt install libc6:amd64 #new user
+        user=your_selected_account_name
+        password=your_supersecret_password
+        adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
+        # set password
+        echo "$user:$password" | chpasswd
+        echo User: $user has been created with password: $password
+        #SCRIPT END
     - name: Install Unzipper
       run: sudo apt-get install unzip -y
     - name: Ngrok Downloading(Linux)
