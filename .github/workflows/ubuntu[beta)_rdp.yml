@@ -40,6 +40,8 @@ jobs:
 #       sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
     - name: TUT1
       run: |
+       sudo ufw allow 5901/tcp
+       sudo ufw allow 3389/tcp
        mkdir -p ~/.vnc
        echo password | vncpasswd -f > ~/.vnc/passwd
        chmod 600 ~/.vnc/passwd
