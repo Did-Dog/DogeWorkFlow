@@ -40,6 +40,7 @@ jobs:
       run: |
        sudo apt install nano -y
        sudo nano /etc/xrdp/xrdp.ini
+       echo `cat /etc/xrdp/xrdp.ini`
     - name: Make Ngrok Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
     - name: Auth
