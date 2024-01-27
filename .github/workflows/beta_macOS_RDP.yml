@@ -17,6 +17,8 @@ jobs:
     - name: Install Unzipper
       run: |
         brew install unzip
+        brew install --cask ngrok
+
     - name: Ngrok Download
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
     - name: Ngrok Extract
