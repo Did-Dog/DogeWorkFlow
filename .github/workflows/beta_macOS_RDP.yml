@@ -1,1 +1,13 @@
 
+name: CI [MacOS]
+
+on: [workflow_dispatch]
+
+jobs:
+  build:
+
+    runs-on: macos-latest
+
+    steps:
+    - name: Unzipper
+      run: echo
