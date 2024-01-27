@@ -20,6 +20,7 @@ jobs:
         brew install --cask ngrok
     - name: Adding New User
       run: |
+        sudo su
         dscl . -create /Users/joeadmin
         dscl . -create /Users/joeadmin UserShell /bin/bash
         dscl . -create /Users/joeadmin RealName "Joe Admin" 
