@@ -9,5 +9,9 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Unzipper
-      run: echo
+    - name: Install Unzipper
+      run: sudo apt-get install unzip -y
+    - name: Download
+      run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+    - name: Extract
+      run: unzip ngrok.zip
