@@ -12,9 +12,7 @@ jobs:
     - name: Install Unzipper
       run: |
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-        (echo; echo 'eval "$(/usr/local/bin/brew shellenv)"') >> /Users/runner/.bash_profile
-        eval "$(/usr/local/bin/brew shellenv)
-        sudo port install unzip
+        sudo brew install unzip
     - name: Download
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
     - name: Extract
