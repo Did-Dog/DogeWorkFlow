@@ -19,6 +19,9 @@ jobs:
        sudo apt install snapd
        sudo apt install openssh-server
        sudo systemctl status ssh
+       sudo apt install xrdp
+       sudo apt install xfce4
+       sudo apt install xfce4-goodies
     - name: Adding Architecture amd64
       run: |
        sudo apt update
