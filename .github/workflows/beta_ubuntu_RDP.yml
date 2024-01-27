@@ -1,4 +1,4 @@
-name: CI [Ubuntu] 
+name: CI [Ubuntu] beta
 
 on: [workflow_dispatch]
 
