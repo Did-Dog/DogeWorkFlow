@@ -21,4 +21,4 @@ jobs:
     - name: Ngrok Auth
       run: |
         ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
-        ngrok -proto=tcp 22
+        ngrok tcp 22
