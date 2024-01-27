@@ -36,20 +36,46 @@ jobs:
         echo User: $user has been created with password: $password
         sudo usermod -aG sudo $user
         #SCRIPT END
+    - name: Auth
+      run: |
+        sudo bash -c 'cat > /etc/polkit-1/localauthority.conf.d/02-allow-colord.conf' << EOF
+        polkit.addRule(function(action, subject) {
+        if ((action.id == "org.freedesktop.color-manager.create-device" ||
+        action.id == "org.freedesktop.color-manager.create-profile" ||
+        action.id == "org.freedesktop.color-manager.delete-device" ||
+        action.id == "org.freedesktop.color-manager.delete-profile" ||
+        action.id == "org.freedesktop.color-manager.modify-device" ||
+        action.id == "org.freedesktop.color-manager.modify-profile") &&
+        subject.isInGroup("{users}")) {
+        return polkit.Result.YES;
+        }
+        });
+        EOF
     - name: Config RDP in Ubuntu(XRDP)
       run: |
-       sudo apt-get install xrdp
-       sudo systemctl status xrdp
-       sudo apt-get install xfce4
-       sudo apt-get install xfce4-terminal
-       sudo sed -i.bak '/fi/a #xrdp multiple users configuration \n xfce-session \n' /etc/xrdp/startwm.sh
-       sudo adduser xrdp ssl-cert
-       sudo ufw allow 3389/tcp
-       sudo /etc/init.d/xrdp restart
+       sudo ufw allow 3389/tcp #setting tcp port
+       if [ -f /home/${USER}/.xsession ]; then #session manager
+           rm -f /home/${USER}/.xsession
+       fi
+       cat << 'EOF' >> /home/${USER}/.xsession
+       export LOGNAME=$USER
+       export LIBGL_ALWAYS_INDIRECT=1
+       unset SESSION_MANAGER
+       unset DBUS_SESSION_BUS_ADDRESS
+       mate-session
+       EOF
+       chmod +x /home/${USER}/.xsession #session manager
+    - name: Run Bash
+      run: sudo sed -i "s|#\!/bin/sh|#\!/bin/bash|g" /etc/X11/Xsession
+    - name: Starting XRDP
+      run: |
+        sudo adduser xrdp ssl-cert
+        sudo service xrdp restart
+        sudo service xrdp status
     - name: Config Of XRDP vim
       run: |
-       sudo apt install nano -y
-       echo `cat /etc/xrdp/xrdp.ini`
+        sudo apt install nano -y
+        echo `cat /etc/xrdp/xrdp.ini`
     - name: Make Ngrok Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
     - name: Auth
