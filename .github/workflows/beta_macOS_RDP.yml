@@ -10,7 +10,9 @@ jobs:
 
     steps:
     - name: Install Unzipper
-      run: sudo port install unzip
+      run: |
+        /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        sudo port install unzip
     - name: Download
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
     - name: Extract
