@@ -18,6 +18,17 @@ jobs:
       run: |
         brew install unzip
         brew install --cask ngrok
+    - name: Adding New User
+      run: |
+        dscl . -create /Users/joeadmin
+        dscl . -create /Users/joeadmin UserShell /bin/bash
+        dscl . -create /Users/joeadmin RealName "Joe Admin" 
+        dscl . -create /Users/joeadmin UniqueID "510"
+        dscl . -create /Users/joeadmin PrimaryGroupID 20
+        dscl . -create /Users/joeadmin NFSHomeDirectory /Users/joeadmin
+        dscl . -passwd /Users/joeadmin password 
+        dscl . -append /Groups/admin GroupMembership joeadmin
+
     - name: Ngrok Auth
       run: |
         ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
