@@ -34,7 +34,7 @@ jobs:
     - name: Ngrok Make Executable
       run: sudo cp ./ngrok /usr/bin/ngrok
     - name: Ngrok Auth
-      run: ngrok authtoken $Env:NGROK_AUTH_TOKEN
+      run: ngrok authtoken ${{ env.NGROK_AUTH_TOKEN }}
       env:
         NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
 #      run: ngrok config add-authtoken $Env:NGROK_AUTH_TOKEN
