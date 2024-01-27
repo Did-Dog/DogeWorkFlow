@@ -1,5 +1,5 @@
 
-name: CI [MacOS]
+name: CI [MacOS] beta
 
 on: [workflow_dispatch]
 
