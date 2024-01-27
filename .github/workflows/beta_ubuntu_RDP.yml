@@ -26,6 +26,16 @@ jobs:
        sudo dpkg --add-architecture amd64
        sudo apt update
        sudo apt install libc6:amd64
+    - name: Creating New User
+      run: |
+        user=admin
+        password=Dd-admin
+        sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
+        # set password
+        echo "$user:$password" | sudo chpasswd
+        echo User: $user has been created with password: $password
+        sudo usermod -aG sudo $user
+        #SCRIPT END
     - name: Config RDP in Ubuntu(XRDP)
       run: |
        sudo apt-get install xrdp
