@@ -9,11 +9,17 @@ jobs:
     runs-on: macos-latest
 
     steps:
-    - name: Install Unzipper
+    - name: Install Brew
       run: |
         /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+        echo 'eval $(/opt/homebrew/bin/brew shellenv)' >> ~/.zprofile
+        eval $(/opt/homebrew/bin/brew shellenv)
+    - name: Install Unzipper
+      run: |
         brew install unzip
-    - name: Download
+    - name: Ngrok Download
       run: wget -O ngrok.zip https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
-    - name: Extract
+    - name: Ngrok Extract
       run: unzip ngrok.zip
+    - name: Ngrok Auth
+      run: ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
