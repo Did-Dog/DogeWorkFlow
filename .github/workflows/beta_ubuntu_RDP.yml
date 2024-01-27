@@ -28,7 +28,7 @@ jobs:
        sudo apt install libc6:amd64
     - name: Creating New User
       run: |
-        user=admin
+        user=dd-admin
         password=Dd-admin
         sudo adduser --quiet --disabled-password --shell /bin/bash --home /home/$user --gecos "User" $user
         # set password
