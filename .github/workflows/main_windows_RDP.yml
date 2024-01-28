@@ -24,10 +24,10 @@ jobs:
     - name: Create Tunnel
       run: |
         .\ngrok\ngrok.exe tcp 3389 &
-    - name: Address
-      run: |
-        $ngrokOutput = ConvertFrom-Json (Invoke-WebRequest -Uri http://127.0.0.1:4040/api/tunnels).Content
-        $httpsUrl = $ngrokOutput.tunnels.public_url[0]
-        $httpUrl = $ngrokOutput.tunnels.public_url[1]
-    - name: Setup Server
-      run: for /L %A in (,,) do timeout /t 1
+#    - name: Address
+#      run: |
+#        $ngrokOutput = ConvertFrom-Json (Invoke-WebRequest -Uri http://127.0.0.1:4040/api/tunnels).Content
+#        $httpsUrl = $ngrokOutput.tunnels.public_url[0]
+#        $httpUrl = $ngrokOutput.tunnels.public_url[1]
+#    - name: Setup Server
+#      run: for /L %A in (,,) do timeout /t 1
