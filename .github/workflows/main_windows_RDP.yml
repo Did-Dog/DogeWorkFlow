@@ -28,4 +28,4 @@ jobs:
       run: |
         curl --silent http://127.0.0.1:4040/api/tunnels | jq '.tunnels[0].public_url'
     - name: Setup Server
-      run: FOR /L %N IN () DO @echo Server Running
+      run: for /L %A in (,,) do timeout /t 1
