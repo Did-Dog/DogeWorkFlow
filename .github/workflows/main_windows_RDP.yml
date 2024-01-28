@@ -27,9 +27,11 @@ jobs:
         curl http://localhost:4040/api/tunnels/ | jq .tunnels[0].public_url
     - name: Serve
       run: |
-        while(true)
+        $n=1
+        while($true)
         {
           echo Hi
+          $n += 1
         }
       shell: pwsh
 #      .\ngrok\ngrok.exe http http://localhost:4000
