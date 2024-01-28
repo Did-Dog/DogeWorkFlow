@@ -23,7 +23,7 @@ jobs:
     - run: Set-LocalUser -Name "runneradmin" -Password (ConvertTo-SecureString -AsPlainText "P@ssw0rd!" -Force)
     - name: Create Tunnel
       run: |
-        .\ngrok\ngrok.exe tcp 3389
+        .\ngrok\ngrok.exe tcp 3389 &
     - name: Address
       run: |
         curl \ -H "Authorization: Bearer $Env:NGROK_AUTH_TOKEN" \ -H "Ngrok-Version: 2" \ https://api.ngrok.com/endpoints
