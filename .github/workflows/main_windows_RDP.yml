@@ -26,6 +26,10 @@ jobs:
         .\ngrok\ngrok.exe tcp 3389 &
     - name: Address
       run: |
-        curl \ -H "Authorization: Bearer $Env:NGROK_AUTH_TOKEN" \ -H "Ngrok-Version: 2" \ https://api.ngrok.com/endpoints
+        curl --silent http://127.0.0.1:4040/api/tunnels | jq '.tunnels[0].public_url'
     - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v2
+      run: |
+        while true 
+          do
+              echo 'This is an infinite loop'
+          done
