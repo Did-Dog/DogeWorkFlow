@@ -32,7 +32,6 @@ jobs:
         $n=1
         while($true)
         {
-          echo Hi
           $n += 1
         }
       shell: pwsh
