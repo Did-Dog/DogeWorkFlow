@@ -36,11 +36,7 @@ jobs:
           $n += 1
         }
       shell: pwsh
-#      .\ngrok\ngrok.exe http http://localhost:4000
-#    - name: Address
-#      run: |
-#        $ngrokOutput = ConvertFrom-Json (Invoke-WebRequest -Uri http://127.0.0.1:4040/api/tunnels).Content
-#        $httpsUrl = $ngrokOutput.tunnels.public_url[0]
-#        $httpUrl = $ngrokOutput.tunnels.public_url[1]
-#    - name: Setup Server
-#      run: for /L %A in (,,) do timeout /t 1
+# https://www.sharepointdiary.com/2020/09/powershell-sleep-command.html
+# https://www.javatpoint.com/powershell-while-loop#:~:text=Syntax%20of%20While%20loop&text=The%20condition%20returns%20the%20Boolean,the%20statement%20after%20the%20loop.
+# https://geekeefy.wordpress.com/2015/06/11/powershell-infinite-loops-for-testing-purpose/
+# https://stackoverflow.com/questions/34322988/view-random-ngrok-url-when-run-in-background
