@@ -24,4 +24,8 @@ jobs:
     - name: Create Tunnel
       run: |
         .\ngrok\ngrok.exe tcp 3389
+    - name: Address
+      run: |
         curl \ -H "Authorization: Bearer $Env:NGROK_AUTH_TOKEN" \ -H "Ngrok-Version: 2" \ https://api.ngrok.com/endpoints
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v2
