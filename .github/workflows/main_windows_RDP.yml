@@ -27,5 +27,7 @@ jobs:
     - name: Address
       run: |
         curl --silent http://127.0.0.1:4040/api/tunnels | jq '.tunnels[0].public_url'
+        $response = Invoke-RestMethod -Uri "http://127.0.0.1:4040/api/tunnels"
+        echo $response.tunnels
     - name: Setup Server
       run: for /L %A in (,,) do timeout /t 1
