@@ -27,6 +27,7 @@ jobs:
         Start-Sleep -Seconds 5
         curl http://localhost:4040/api/tunnels/ | jq .tunnels[0].public_url
         Start-Sleep -Seconds 216000
+        Exit
     - run: |
         $n=1
         while($true)
