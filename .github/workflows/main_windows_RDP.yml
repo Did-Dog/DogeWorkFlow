@@ -26,7 +26,7 @@ jobs:
         .\ngrok\ngrok.exe tcp 3389 &
         curl http://localhost:4040/api/tunnels/ | jq .tunnels[0].public_url
     - name: Serve
-      run: .\ngrok\ngrok.exe http http://localhost:4040
+      run: .\ngrok\ngrok.exe http http://localhost:4000
 #    - name: Address
 #      run: |
 #        $ngrokOutput = ConvertFrom-Json (Invoke-WebRequest -Uri http://127.0.0.1:4040/api/tunnels).Content
