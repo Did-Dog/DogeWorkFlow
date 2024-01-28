@@ -32,7 +32,7 @@ jobs:
           echo $count
           $count +=1
         }
-      shell: cmd
+      shell: pwsh
 #      .\ngrok\ngrok.exe http http://localhost:4000
 #    - name: Address
 #      run: |
