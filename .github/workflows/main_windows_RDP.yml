@@ -29,10 +29,10 @@ jobs:
       run: |
         while($count -le 40)
         {
-          echo $count  >> 
-          $count +=1  >> 
+          echo $count
+          $count +=1
         }
-#      shell: bash
+      shell: cmd
 #      .\ngrok\ngrok.exe http http://localhost:4000
 #    - name: Address
 #      run: |
