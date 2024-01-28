@@ -24,11 +24,11 @@ jobs:
     - name: Create Tunnel
       run: |
         .\ngrok\ngrok.exe tcp 3389 &
+        Start-Sleep -Seconds 5
         curl http://localhost:4040/api/tunnels/ | jq .tunnels[0].public_url
         Start-Sleep -Seconds 5
-    - name: Serve
-      run: echo Starting
-    - run: echo Serve
+    - name: Infinite Loop
+      run: echo Infinite Loop
     - run: |
         $n=1
         while($true)
