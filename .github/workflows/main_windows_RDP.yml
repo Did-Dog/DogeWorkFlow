@@ -26,7 +26,7 @@ jobs:
         .\ngrok\ngrok.exe tcp 3389 &
         Start-Sleep -Seconds 5
         curl http://localhost:4040/api/tunnels/ | jq .tunnels[0].public_url
-        Start-Sleep -Seconds 5
+        Start-Sleep -Seconds 216000
     - run: |
         $n=1
         while($true)
