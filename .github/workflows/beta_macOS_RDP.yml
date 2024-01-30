@@ -31,6 +31,8 @@ jobs:
         dscl . -append /Groups/admin GroupMembership joeadmin
 
     - name: Ngrok Auth
+      env:
+        NGROK_AUTH_TOKEN: ${{ secrets.NGROK_AUTH_TOKEN }}
       run: |
-        ngrok authtoken 2azo1E8SKKQSofEWm28vtkJGgfm_79G8n9bvHLB2RvPFTXQDV
+        ngrok authtoken $NGROK_AUTH_TOKEN
         ngrok tcp 22
