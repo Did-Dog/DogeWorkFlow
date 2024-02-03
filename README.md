@@ -144,7 +144,9 @@
 
   ## Licence
   ```
-  MIT
+MIT License
+
+Copyright (c) 2024 DidDog
   ```
 
 -------------------------
